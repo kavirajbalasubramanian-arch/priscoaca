@@ -1,0 +1,130 @@
+/* PRISCO v4 effects layer: motion, polish and mobile fixes. Everything animated honours prefers-reduced-motion. */
+html{scroll-padding-top:84px}
+body{overflow-x:clip;-webkit-tap-highlight-color:transparent}
+img,video{height:auto}
+
+h1,h2,h3{text-wrap:balance}
+p,li{text-wrap:pretty}
+input,select,textarea{font-size:max(16px,1rem)} /* stops iOS zoom on focus */
+.btn,.burger,summary{min-height:44px}
+@media(max-width:900px){.nav a{min-height:44px;display:flex;align-items:center}}
+.hdr.fx-solid{box-shadow:0 10px 30px -18px rgba(27,10,16,.55)}
+.hdr{padding-top:env(safe-area-inset-top)}
+@supports(padding:max(0px)){.wrap{padding-left:max(1.5rem,env(safe-area-inset-left));padding-right:max(1.5rem,env(safe-area-inset-right))}}
+
+/* pulse line across the hero */
+.fx-ecg{position:absolute;left:0;right:0;bottom:2.2rem;height:90px;z-index:0;pointer-events:none;opacity:.55;
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}
+.fx-ecg svg{width:100%;height:100%}
+.fx-ecg path{fill:none;stroke:url(#fxg);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:260 1340;stroke-dashoffset:260;animation:fxbeat 5.5s linear infinite;filter:drop-shadow(0 0 6px rgba(63,208,208,.7))}
+.fx-ecg path.base{stroke-dasharray:none;stroke-dashoffset:0;opacity:.18;animation:none;filter:none}
+@keyframes fxbeat{to{stroke-dashoffset:-1340}}
+
+/* floating code cards, using the independent translate property so existing reveals still work */
+.hero .dcard{animation:fxfloat 7s ease-in-out infinite;animation-delay:calc(var(--i,0)*-1.3s);will-change:translate}
+@keyframes fxfloat{0%,100%{translate:0 0}50%{translate:0 -7px}}
+.hero .dcard:hover,.hero .dcard:focus-within{animation-play-state:paused}
+
+/* cursor spotlight on cards */
+.fx-spot{position:relative;--mx:50%;--my:50%}
+.fx-spot::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+ background:radial-gradient(260px circle at var(--mx) var(--my),rgba(63,208,208,.20),transparent 62%)}
+.fx-spot:hover::after{opacity:1}
+.fx-spot{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.fx-spot:hover{transform:translateY(-4px);box-shadow:0 22px 44px -26px rgba(0,0,0,.55)}
+
+/* button shine and press feedback */
+.btn{position:relative;overflow:hidden;isolation:isolate;transition:transform .2s,box-shadow .3s,background-color .3s}
+.btn::before{content:"";position:absolute;top:0;bottom:0;left:-70%;width:45%;z-index:-1;transform:skewX(-20deg);
+ background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);transition:left .7s}
+.btn:hover::before{left:130%}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+
+/* hero headline: slow colour sweep on accent text only */
+.hero h1 .accent{background:linear-gradient(100deg,currentColor 0%,#7ff0ee 45%,currentColor 90%);background-size:220% 100%;
+ -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:fxsweep 6s ease-in-out infinite}
+@keyframes fxsweep{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+
+/* back to top */
+.fx-top{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:max(18px,env(safe-area-inset-bottom));z-index:90;width:46px;height:46px;border-radius:50%;
+ border:1px solid rgba(255,255,255,.3);background:rgba(27,10,16,.82);color:#fff;display:grid;place-items:center;cursor:pointer;
+ opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s,transform .3s,visibility .3s;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.fx-top.on{opacity:1;visibility:visible;transform:none}
+.fx-top svg{width:18px;height:18px}
+
+/* chat button must never hide form buttons on phones */
+@media(max-width:700px){
+ main{padding-bottom:70px}
+ .fx-ecg{bottom:1rem;height:60px}
+ .hero .dcard{animation-duration:9s}
+ .btn-row .btn{width:100%;justify-content:center;text-align:center}
+ table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+@media(hover:none){.fx-spot:hover{transform:none;box-shadow:none}.fx-spot::after{display:none}}
+@media(prefers-reduced-motion:reduce){
+ .fx-ecg path,.hero .dcard,.hero h1 .accent{animation:none!important}
+ .fx-ecg path{stroke-dasharray:none;stroke-dashoffset:0}
+ .btn::before{display:none}.fx-spot,.btn{transition:none}
+ html{scroll-behavior:auto}
+}
+
+/* healthcare icons drifting behind the hero */
+.fx-icons{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.fx-ico{position:absolute;width:var(--s,64px);height:var(--s,64px);color:#fff;opacity:.13;animation:fxdrift var(--t,14s) ease-in-out infinite;animation-delay:var(--d,0s)}
+.fx-ico svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.fx-ico.teal{color:#3fd0d0;opacity:.28}.fx-ico.gold{color:#c9b78f;opacity:.26}
+@keyframes fxdrift{0%,100%{translate:0 0;rotate:-4deg}50%{translate:14px -22px;rotate:5deg}}
+.fx-helix path.r{animation:fxrung 2.4s ease-in-out infinite;animation-delay:calc(var(--k)*.18s)}
+@keyframes fxrung{0%,100%{opacity:.25}50%{opacity:1}}
+.fx-pulse path{stroke-dasharray:60;animation:fxdraw 3s ease-in-out infinite}
+@keyframes fxdraw{0%{stroke-dashoffset:60}60%,100%{stroke-dashoffset:0}}
+.hero .wrap{position:relative;z-index:1}
+.hero>.fx-icons{position:absolute}
+
+/* tagline chip with rotating word */
+.fx-tag{display:inline-flex;align-items:center;gap:.6rem;margin:0 0 1rem;padding:.45rem .95rem;border:1px solid rgba(255,255,255,.28);border-radius:999px;
+ background:rgba(255,255,255,.08);font:600 .78rem/1 var(--f-ui,inherit);letter-spacing:.16em;text-transform:uppercase;color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.fx-tag i{width:8px;height:8px;border-radius:50%;background:#3fd0d0;box-shadow:0 0 0 0 rgba(63,208,208,.7);animation:fxping 2s infinite}
+@keyframes fxping{70%{box-shadow:0 0 0 10px rgba(63,208,208,0)}100%{box-shadow:0 0 0 0 rgba(63,208,208,0)}}
+.fx-tag b{display:inline-block;min-width:8.2em;font-weight:700;color:#c9b78f;transition:opacity .35s,translate .35s}
+.fx-tag b.out{opacity:0;translate:0 6px}
+@media(max-width:700px){.fx-ico:nth-child(n+5){display:none}.fx-tag{font-size:.7rem;letter-spacing:.12em}.fx-tag b{min-width:7.6em}}
+@media(prefers-reduced-motion:reduce){.fx-ico,.fx-helix path.r,.fx-pulse path,.fx-tag i{animation:none!important}.fx-pulse path{stroke-dasharray:none}}
+
+/* Precision / Knowledge / Excellence section: layout and animated illustrations */
+.pek-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem;margin-top:2.6rem}
+.pek-card{position:relative;padding:1.5rem 1.5rem 1.8rem;border:1px solid rgba(255,255,255,.16);border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.pek-art{display:block;width:100%;max-width:300px;height:auto;aspect-ratio:240/200;margin:0 auto .6rem;overflow:visible;font-family:var(--f-brand,inherit);font-weight:700}
+.pek-num{font:700 .78rem/1 var(--f-brand,inherit);letter-spacing:.24em;color:var(--gold,#c9b78f);margin:.4rem 0 .35rem}
+.pek-card h3{margin:0 0 .55rem;font-family:var(--f-display,Georgia,serif);font-size:clamp(1.7rem,2.4vw,2.1rem);line-height:1.1;color:#fff}
+.pek-card p{margin:0;color:rgba(255,255,255,.80);line-height:1.6}
+.pek-art .ln{fill:none;stroke:rgba(255,255,255,.2);stroke-width:1.2}
+.pek-art .tl{fill:none;stroke:#3fd0d0}
+.pek-art .gd{fill:none;stroke:#c9b78f}
+.pek-art .sp{transform-box:fill-box;transform-origin:center}
+.p-ring{animation:fxspin 18s linear infinite}
+.p-ring2{animation:fxspin 28s linear infinite reverse}
+.k-orb{animation:fxspin 46s linear infinite}
+@keyframes fxspin{to{transform:rotate(360deg)}}
+.p-beam{animation:fxbeam 3.4s ease-in-out infinite}
+@keyframes fxbeam{0%,100%{transform:translateY(-48px)}50%{transform:translateY(48px)}}
+.p-br{animation:fxbreath 3s ease-in-out infinite}
+@keyframes fxbreath{0%,100%{transform:scale(.94)}50%{transform:scale(1.07)}}
+.p-tag{animation:fxbob 3.2s ease-in-out infinite}
+@keyframes fxbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.k-core{animation:fxbreath 2.8s ease-in-out infinite}
+.k-line{stroke-dasharray:72;animation:fxdraw2 4s ease-in-out infinite;animation-delay:calc(var(--d)*.25s)}
+@keyframes fxdraw2{0%{stroke-dashoffset:72}35%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:-72}}
+.k-node{animation:fxnode 3.6s ease-in-out infinite;animation-delay:calc(var(--d)*.3s)}
+@keyframes fxnode{0%,100%{fill-opacity:.1}50%{fill-opacity:.32}}
+.k-pulse{opacity:0;animation:fxtravel 3.6s ease-in infinite;animation-delay:calc(var(--d)*.4s)}
+@keyframes fxtravel{0%{translate:0 0;opacity:0}15%{opacity:1}85%{opacity:1}100%{translate:var(--dx) var(--dy);opacity:0}}
+.e-arc{stroke-dasharray:377;stroke-dashoffset:377;animation:fxarc 5.5s ease-out infinite}
+@keyframes fxarc{0%{stroke-dashoffset:377}45%,92%{stroke-dashoffset:19}100%{stroke-dashoffset:377}}
+.e-bar{transform-box:fill-box;transform-origin:bottom;animation:fxbar 3s ease-in-out infinite;animation-delay:calc(var(--d)*.15s)}
+@keyframes fxbar{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+.e-star{animation:fxtwinkle 2.6s ease-in-out infinite;animation-delay:calc(var(--d)*.6s)}
+@keyframes fxtwinkle{0%,100%{transform:scale(.5) rotate(0);opacity:.3}50%{transform:scale(1.15) rotate(40deg);opacity:1}}
+@media(max-width:900px){.pek-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto}}
+@media(prefers-reduced-motion:reduce){.p-ring,.p-ring2,.k-orb,.p-beam,.p-br,.p-tag,.k-core,.k-line,.k-node,.k-pulse,.e-arc,.e-bar,.e-star{animation:none!important}.e-arc{stroke-dashoffset:19}.k-line{stroke-dasharray:none}.k-pulse{opacity:0}.p-beam{transform:none}}

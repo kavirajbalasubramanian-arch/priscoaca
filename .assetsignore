@@ -1,0 +1,9 @@
+.git
+.gitattributes
+.assetsignore
+wrangler.jsonc
+node_modules
+README.md
+DEPLOY.md
+*.md
+*.bak

@@ -1,0 +1,50 @@
+/* Former inline styles moved out of the HTML. Specificity matches the old inline rules. */
+.s1.s1.s1{right:-8rem;top:2rem}
+.s2.s2.s2{--p1:#0b4a52;--p2:#0aabab}
+.s3.s3.s3{--p1:#3b1220;--p2:#9b1020}
+.s4.s4.s4{--p1:#0b4a52;--p2:#6e0a14}
+.s5.s5.s5{--p1:#4a1627;--p2:#0aabab}
+.s6.s6.s6{--p1:#5b1e2e;--p2:#b3182b}
+.s7.s7.s7{right:-10rem;top:-4rem}
+.s8.s8.s8{margin:0}
+.s9.s9.s9{right:-10rem;bottom:-8rem}
+.s10.s10.s10{display:grid;gap:1.6rem}
+.s11.s11.s11{--d:1}
+.s12.s12.s12{--d:2}
+.s13.s13.s13{--d:3}
+.s14.s14.s14{--d:4}
+.s15.s15.s15{--d:5}
+.s16.s16.s16{--d:6}
+.s17.s17.s17{--d:1;--dx:0px;--dy:70px}
+.s18.s18.s18{--d:2;--dx:-61px;--dy:35px}
+.s19.s19.s19{--d:3;--dx:-61px;--dy:-35px}
+.s20.s20.s20{--d:4;--dx:0px;--dy:-70px}
+.s21.s21.s21{--d:5;--dx:61px;--dy:-35px}
+.s22.s22.s22{--d:6;--dx:61px;--dy:35px}
+.s23.s23.s23{left:-14rem;top:-6rem}
+.s24.s24.s24{margin-top:1.4rem}
+.s25.s25.s25{color:var(--muted-d)}
+.s26.s26.s26{}
+.s27.s27.s27{right:-12rem;top:-5rem}
+.s28.s28.s28{max-width:56ch;margin:0 auto 1.4rem}
+.s29.s29.s29{justify-content:center}
+.s30.s30.s30{max-width:56ch;margin:1.4rem auto 0;font-size:.9rem;opacity:.85}
+.s31.s31.s31{padding-top:2rem}
+.s32.s32.s32{margin-top:2cqw;color:var(--gold)}
+.s33.s33.s33{margin-top:2cqw}
+.s34.s34.s34{margin-top:2cqw;font-size:1.25cqw}
+.s35.s35.s35{margin-top:1rem}
+.s36.s36.s36{width:0%}
+.s37.s37.s37{font-weight:700;margin:.2rem 0 .6rem}
+.s38.s38.s38{padding-top:2.5rem}
+.s39.s39.s39{left:-12rem;bottom:-8rem}
+.s40.s40.s40{margin-top:2.4rem}
+.s41.s41.s41{color:var(--gold)}
+.s42.s42.s42{margin-top:1.2rem}
+.s43.s43.s43{--c:#0aabab}
+.s44.s44.s44{--c:#9b1020}
+.s45.s45.s45{--c:#b2a07a}
+.s46.s46.s46{color:var(--muted)}
+.s47.s47.s47{font-family:var(--f-brand);font-weight:600;font-size:.8rem;letter-spacing:.04em;color:var(--maroon)}
+.s48.s48.s48{font-size:.95rem}
+.s49.s49.s49{list-style:none;padding:0;margin:0;color:var(--txt-d)}
